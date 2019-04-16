@@ -29,7 +29,7 @@ class Dota_tarin(Dataset):
         # read filenames
         filenames = glob.glob(os.path.join(root,'images', '*.jpg'))
         for fn in filenames:
-            img_num = fn.split('/')[4].split('.')[0]
+            img_num = fn.split('/')[-1].split('.')[0]
             label_fn = os.path.join(root,'labelTxt_hbb',img_num+'.txt')
             self.filenames.append((fn, label_fn))             
         self.len = len(self.filenames)
@@ -274,7 +274,7 @@ class Dota_test(Dataset):
         if self.transform is not None:
             img = self.transform(img)
 
-        return img, image_fn.split('/')[4].split('.')[0] #gt
+        return img, image_fn.split('/')[-1].split('.')[0] #gt
 
     def __len__(self):
         """ Total number of samples in the dataset """
